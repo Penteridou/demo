@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 
 import java.text.DateFormat;
@@ -10,12 +11,9 @@ import java.util.Date;
 public class Temperature {
 
     private  String level;
-
     @Id
     private String id;
-
-    public Temperature() {
-    }
+    private TimeStamp timestamp;
 
     public Temperature(String level) {
         this.level = level;
@@ -26,16 +24,24 @@ public class Temperature {
     }
 
     public String getId() {
-        return id; //this.getLevel()+"_"+getCurrentStringDate();
+        return id;
     }
 
     public void setId(String level) {
-        this.id = this.level +"_" +getCurrentStringDate();
+        this.id = this.level +"_" + getCurrentStringTimeStamp("ddMMyyyy");
     }
 
-    public static String getCurrentStringDate(){
+    public void setTimestamp(TimeStamp timestamp) {
+        this.timestamp = timestamp; // .setDate("000000");//getCurrentStringTimeStamp("ddMMyyyy"));
+    }
+
+    public TimeStamp getTimestamp() {
+        return timestamp;
+    }
+
+    public String getCurrentStringTimeStamp(String formatStr){
         Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        DateFormat dateFormat = new SimpleDateFormat(formatStr);
         String strDate = dateFormat.format(date);
         return strDate;
     }
