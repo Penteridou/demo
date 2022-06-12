@@ -15,13 +15,13 @@ public class SensorService {
     @Autowired
     SensorRepository sensorRepository;
 
-    public Result addTemperature(Temperature temperature, String sensorId){//, String sensorId) {
+    public Result addTemperature(Temperature temperature, String sensorId){
     System.out.println("sensorId:"+sensorId +"  |temperature level: "+temperature.getLevel());
           Map<String,Object> params = new HashMap<>();
 
         String query = "MATCH  (a:Sensor {id: '"+sensorId+"'}) \n" +
-                "CREATE (a)-[r:DETECTS]->(:Temperature{level:'"+temperature.getLevel()+"'})\n" +
-                " RETURN type(r)";
+                "CREATE (a)-[r:DETECTS]->(:Temperature{level:'"+temperature.getLevel()+"',id:'"+temperature.getId()+"' })\n" +
+                "RETURN type(r)";
 
         return com.example.neo4j02.Neo4jSessionFactory.getInstance().getNeo4jSession().query(query, params);
     }

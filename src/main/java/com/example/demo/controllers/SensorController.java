@@ -33,6 +33,7 @@ public class SensorController {
     @PostMapping("/temperatures/new")
     public String getSensors(@RequestBody ObjectNode objectNode){//@RequestBody Temperature temperature,String sensorId){
         var temperature = new Temperature(objectNode.get("level").asText());
+        temperature.setId(objectNode.get("sensorId").asText());
         sensorService.addTemperature(temperature, objectNode.get("sensorId").asText());
         //  sensorService.addTemperature(temperature, sensorId);
         return "Temperature added with id: " +temperature.getLevel();

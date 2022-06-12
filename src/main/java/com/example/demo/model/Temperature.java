@@ -30,12 +30,12 @@ public class Temperature {
     }
 
     public void setId(String level) {
-        this.id = this.level + getCurrentStringDate();
+        this.id = this.level +"_" +getCurrentStringDate();
     }
 
     public static String getCurrentStringDate(){
         Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("ddmmyyyy");
+        DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         String strDate = dateFormat.format(date);
         return strDate;
     }
