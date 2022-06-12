@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface UserRepository extends Neo4jRepository<User, Long> {
+public interface UserRepository extends Neo4jRepository<User, Integer> {
    @Query("MATCH (n:User) RETURN n LIMIT 25")
    Collection<User> getAllUsers();
 
    @Query("LOAD CSV WITH HEADERS FROM \"file:///users.csv\" AS Line\n" +
-           "CREATE p = (:User {name:Line.name})-[:RecordedBy]->(:Sensor {id: Line.id})\n" +
+           "CREATE p = (:User {name:Line.name, id:toInteger(Line.userId)})-[:RecordedBy]->(:Sensor {id: Line.sensorId})\n" +
            "RETURN p\n")
    Collection<User> importData();
 

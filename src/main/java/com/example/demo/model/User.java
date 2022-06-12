@@ -10,7 +10,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 public class User {
     @Id
-    private Long id;
+    private Integer id;
     private String name;
     @Relationship(type="RecordedBy", direction = Relationship.Direction.INCOMING)
     private Sensor sensor;
@@ -18,7 +18,7 @@ public class User {
     public User() {
     }
 
-    public Long getId() { return id; }
+    public Integer getId() { return id; }
 
     public String getName() { return name; }
 

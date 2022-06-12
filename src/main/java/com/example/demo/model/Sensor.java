@@ -7,13 +7,13 @@ import java.util.List;
 //@NodeEntity
 public class Sensor {
    // @Id
-    private Long id;
+    private String id;
     private List<Double> tempratures;
 
     public Sensor() {
     }
 
-    public Long getId() { return id; }
+    public String getId() { return id; }
 
     public List<Double> getTempratures() {
         return tempratures;
