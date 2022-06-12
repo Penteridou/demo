@@ -5,6 +5,7 @@ import com.example.demo.model.Temperature;
 import com.example.demo.model.User;
 import com.example.demo.repositories.SensorRepository;
 import com.example.demo.services.SensorService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +31,10 @@ public class SensorController {
     }
 
     @PostMapping("/temperatures/new")
-    public String getSensors(@RequestBody Temperature temperature){
-        sensorService.addTemperature(temperature);
+    public String getSensors(@RequestBody ObjectNode objectNode){//@RequestBody Temperature temperature,String sensorId){
+        var temperature = new Temperature(objectNode.get("level").asText());
+        sensorService.addTemperature(temperature, objectNode.get("sensorId").asText());
+        //  sensorService.addTemperature(temperature, sensorId);
         return "Temperature added with id: " +temperature.getLevel();
     }
 }

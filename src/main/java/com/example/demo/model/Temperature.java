@@ -12,13 +12,13 @@ public class Temperature {
     private  String level;
 
     @Id
-    private String id;//= "testId0";
+    private String id;
 
     public Temperature() {
     }
 
     public Temperature(String level) {
-        this.level = "level";
+        this.level = level;
     }
 
     public String getLevel() {
