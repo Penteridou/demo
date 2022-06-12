@@ -14,7 +14,7 @@ public interface UserRepository extends Neo4jRepository<User, Integer> {
    Collection<User> getAllUsers();
 
    @Query("LOAD CSV WITH HEADERS FROM \"file:///users.csv\" AS Line\n" +
-           "CREATE p = (:User {name:Line.name, id:toInteger(Line.userId)})-[:RecordedBy]->(:Sensor {id: Line.sensorId})\n" +
+           "CREATE p = (:User {name:Line.name, id:toInteger(Line.userId)})-[:RecordedBy]->(:Sensor {id: Line.sensorId, model: Line.sensorModel})\n" +
            "RETURN p\n")
    Collection<User> importData();
 
