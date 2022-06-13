@@ -6,14 +6,9 @@ import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.UserService;
 import org.neo4j.ogm.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -30,8 +25,7 @@ public class UserController {
     @GetMapping("/import")
     public String importData(){
        userService.importData();
-     //  return (List<User>) userRepository.findAll();
-       return "import data ";
+       return "users with sensors data import ";
     }
 
     @GetMapping("/clear")

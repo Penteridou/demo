@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 
 import java.text.DateFormat;

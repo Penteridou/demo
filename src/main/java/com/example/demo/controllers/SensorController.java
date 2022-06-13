@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 import com.example.demo.model.Sensor;
 import com.example.demo.model.Temperature;
 import com.example.demo.model.TimeStamp;
-import com.example.demo.model.User;
 import com.example.demo.repositories.SensorRepository;
 import com.example.demo.services.SensorService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -35,11 +34,10 @@ public class SensorController {
     public String getSensors(@RequestBody ObjectNode objectNode){//@RequestBody Temperature temperature,String sensorId){
         var temperature = new Temperature(objectNode.get("level").asText());
         var timeStamp = new TimeStamp();
-        temperature.setId(objectNode.get("sensorId").asText());
-       // System.out.println("---->"+timeStamp.getTime());
+        var sensorIdByRequest = objectNode.get("sensorId").asText();
+        temperature.setId(sensorIdByRequest);
         temperature.setTimestamp(timeStamp);
-        sensorService.addTemperature(temperature, objectNode.get("sensorId").asText());
-        //  sensorService.addTemperature(temperature, sensorId);
+        sensorService.addTemperature(temperature, sensorIdByRequest);
         return "Temperature added with id: " +temperature.getId();
     }
 }

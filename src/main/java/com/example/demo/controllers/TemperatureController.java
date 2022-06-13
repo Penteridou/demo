@@ -28,4 +28,11 @@ public class TemperatureController {
     public List<Temperature> getTemperatures(){
         return temperatureRepository.findAll();
     }
+
+    @GetMapping("/import")
+    public String importData(){
+        temperatureService.importData();
+        //  return (List<User>) userRepository.findAll();
+        return " temperatures import from csv";
+    }
 }

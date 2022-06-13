@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @Repository
 public interface UserRepository extends Neo4jRepository<User, Integer> {
-   @Query("MATCH (n:User) RETURN n LIMIT 25")
+   @Query("MATCH (n:User) RETURN n")
    Collection<User> getAllUsers();
 
    @Query("LOAD CSV WITH HEADERS FROM \"file:///users.csv\" AS Line\n" +
@@ -22,7 +22,4 @@ public interface UserRepository extends Neo4jRepository<User, Integer> {
            "DETACH DELETE n")
    Collection<User> clearData();
 
-
-//   @Query("MATCH (t:Temperature)-[]-(s:Sensor)-[]-(u:User) where u.id =8 return t.level")
-//    Object getUserHourlyData(int userId);
 }
