@@ -1,12 +1,10 @@
 package com.example.demo.services;
-import com.example.demo.model.Temperature;
-import com.example.demo.model.User;
+
 import com.example.demo.repositories.UserRepository;
 import org.neo4j.ogm.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
