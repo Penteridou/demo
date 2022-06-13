@@ -23,4 +23,6 @@ public interface UserRepository extends Neo4jRepository<User, Integer> {
    Collection<User> clearData();
 
 
+//   @Query("MATCH (t:Temperature)-[]-(s:Sensor)-[]-(u:User) where u.id =8 return t.level")
+//    Object getUserHourlyData(int userId);
 }

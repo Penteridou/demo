@@ -28,7 +28,7 @@ public class Temperature {
     }
 
     public void setId(String level) {
-        this.id = this.level +"_" + getCurrentStringTimeStamp("ddMMyyyy");
+        this.id = this.level +"_" + getCurrentStringTimeStamp("yyyy-MM-dd");
     }
 
     public void setTimestamp(TimeStamp timestamp) {

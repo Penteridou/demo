@@ -10,10 +10,8 @@ public class TimeStamp {
     private String date;
     private String time;
 
-
-
     public TimeStamp() {
-        this.date = getCurrentStringTimeStamp("ddMMyyyy");
+        this.date = getCurrentStringTimeStamp("yyyy-MM-dd");
         this.time = getCurrentStringTimeStamp("hh:mm");;
     }
 

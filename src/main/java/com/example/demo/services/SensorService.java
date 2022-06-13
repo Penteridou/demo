@@ -20,7 +20,7 @@ public class SensorService {
           Map<String,Object> params = new HashMap<>();
 
         String query = "MATCH  (a:Sensor {id: '"+sensorId+"'}) \n" +
-                "CREATE (a)-[r:DETECTS]->(:Temperature{level:'"+temperature.getLevel()+"',id:'"+temperature.getId()+"',date:'"+temperature.getTimestamp().getDate()+"',time:'"+temperature.getTimestamp().getTime()+"' })\n" +
+                "CREATE (a)-[r:DETECTS]->(:Temperature{level:'"+temperature.getLevel()+"',id:'"+temperature.getId()+"',date:date('"+temperature.getTimestamp().getDate()+"'),time:localtime('"+temperature.getTimestamp().getTime()+"') })\n" +
                 "RETURN type(r)";
 
         return com.example.neo4j02.Neo4jSessionFactory.getInstance().getNeo4jSession().query(query, params);
