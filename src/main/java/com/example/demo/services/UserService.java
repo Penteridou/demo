@@ -36,17 +36,23 @@ public class UserService {
 
     public Result getUserHourlyData(int userId) {
         Map<String,Object> params = new HashMap<>();
-        String query = "MATCH (t:Temperature)-[]-(s:Sensor)-[]-(u:User)\n" +
-                "        where  u.id ="+userId+" and  t.date=date()\n" +
-                "        RETURN  t.date as today, t.time.hour as time, collect(t.level)  as temperatures";
+        String query = "MATCH (temp:Temperature)-[]-(sen:Sensor)-[]-(user:User)\n" +
+                "        where  user.id ="+userId+"  and  temp.date=date()\n" +
+                "        WITH temp, toFloat(temp.level) AS tempLevelFloat\n" +
+                "        RETURN  temp.date as today, temp.time.hour as time, " +
+                "        collect(tempLevelFloat)  as temperatures,avg(tempLevelFloat) as AvgTemp," +
+                "        min(tempLevelFloat) as minTemp, max(tempLevelFloat) as maxTemp";
         return com.example.neo4j02.Neo4jSessionFactory.getInstance().getNeo4jSession().query(query, params);
     }
 
     public Result getUserDailyData(int userId) {
         Map<String,Object> params = new HashMap<>();
-        String query = "MATCH (t:Temperature)-[]-(s:Sensor)-[]-(u:User)\n" +
-                "        where u.id ="+userId+" \n" +
-                "        RETURN t.date, collect(t.level)\n";
+        String query = "MATCH (temp:Temperature)-[]-(sen:Sensor)-[]-(user:User)\n" +
+                "        where  user.id ="+userId+" \n" +
+                "        WITH temp, toFloat(temp.level) AS tempLevelFloat\n" +
+                "        RETURN temp.date as day, collect(tempLevelFloat)  as temperatures , " +
+                "        avg(tempLevelFloat) as AvgTemp, min(tempLevelFloat) as minTemp, " +
+                "        max(tempLevelFloat) as maxTemp";
         return com.example.neo4j02.Neo4jSessionFactory.getInstance().getNeo4jSession().query(query, params);
     }
 }
