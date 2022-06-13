@@ -18,10 +18,6 @@ public class UserService {
     public UserService() {
     }
 
-//    public Collection<User> getAll() {
-//        return userRepository.getAllUsers();
-//    }
-
     public void importData() {
         userRepository.importData();
     }

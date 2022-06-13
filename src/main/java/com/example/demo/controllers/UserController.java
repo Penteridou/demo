@@ -15,13 +15,12 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/userdata")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     UserRepository userRepository;
     private final UserService userService;
-
 
     public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
@@ -41,23 +40,21 @@ public class UserController {
         return "clear data ";
     }
 
-    @GetMapping("/users")
+    @GetMapping("/all")
     public List<User> getUsers(){
-       // return  "Hello";
-        return (List<User>) userRepository.findAll();
+        return userRepository.findAll();
     }
-    @GetMapping("/users/temperatures/{userid}")
+    @GetMapping("/temperatures/{userid}")
     public Result getUserTemperatures(@PathVariable int userid){
         return userService.getUserTemperature(userid);
     }
-
-    @GetMapping("/users/temperatures/hourly/{userid}")
-    public Result getUserHourlyData(@PathVariable int userId){
-         return userService.getUserHourlyData(userId);
+    @GetMapping("/temperatures/hourly/{userid}")
+    public Result getUserHourlyData(@PathVariable int userid){
+         return userService.getUserHourlyData(userid);
     }
-    @GetMapping("/users/temperatures/daily/{userid}")
-    public Result getUserDailyData(@PathVariable int userId){
-        return userService.getUserHourlyData(userId);
+    @GetMapping("/temperatures/daily/{userid}")
+    public Result getUserDailyData(@PathVariable int userid){
+        return userService.getUserDailyData(userid);
     }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/temperature/new/{userid}/{level}")
+@RequestMapping("/sensors")
 public class SensorController {
 
     @Autowired
@@ -26,12 +26,12 @@ public class SensorController {
         this.sensorService = sensorService;
     }
 
-    @GetMapping("/sensors")
+    @GetMapping("/all")
     public List<Sensor> getSensors(){
         return (List<Sensor>) sensorRepository.findAll();
     }
 
-    @PostMapping("/temperatures/new")
+    @PostMapping("/temperature/new")
     public String getSensors(@RequestBody ObjectNode objectNode){//@RequestBody Temperature temperature,String sensorId){
         var temperature = new Temperature(objectNode.get("level").asText());
         var timeStamp = new TimeStamp();
@@ -40,6 +40,6 @@ public class SensorController {
         temperature.setTimestamp(timeStamp);
         sensorService.addTemperature(temperature, objectNode.get("sensorId").asText());
         //  sensorService.addTemperature(temperature, sensorId);
-        return "Temperature added with id: " +temperature.getLevel();
+        return "Temperature added with id: " +temperature.getId();
     }
 }
